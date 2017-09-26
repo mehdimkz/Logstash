@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  logstash:
+    build: .
+    environment:
+      - DATABASE_HOST=$DATABASE_HOST
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - DATABASE_PORT=$DATABASE_PORT
+      - DATABASE_USE_SSL=$DATABASE_USE_SSL
+      - DATABASE_USERNAME=$DATABASE_USERNAME
+      - DATABASE=$DATABASE
+      - SCHEDULE=$SCHEDULE
+      - PIPELINE_WORKERS=1
+      - XPACK_MONITORING_ENABLED=false
+      - LOG_LEVEL=info
+      - path.logs=/usr/share/logstash/log
+      - DEBUG=$DEBUG
+    volumes:
+      - $LAST_RUN_METADATA_PATH:/usr/share/logstash/last_run
+      - $LOG_PATH:/usr/share/logstash/log
